@@ -30,15 +30,9 @@ public class UserService {
 
 	@Transactional
 	public UserResponseDto update(UserUpdateDto userUpdateDto) {
-		System.out.println("userUpdateDto.getEmail() = " + userUpdateDto.getEmail());
-		System.out.println("userUpdateDto.getBio() = " + userUpdateDto.getBio());
 		User userEntity = userRepository.findByEmail(userUpdateDto.getEmail())
 			.orElseThrow(() -> new NoSuchElementException("잘못된 이메일 입니다"));
-
 		userEntity.update(userUpdateDto);
-
-		System.out.println("userEntity.getBio() = " + userEntity.getBio());
-		System.out.println("userEntity.getEmail() = " + userEntity.getEmail());
 
 		return UserResponseDto.builder()
 			.username(userEntity.getUsername())
