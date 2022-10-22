@@ -3,11 +3,13 @@ package com.example.realWorld.web.user.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.realWorld.web.user.dto.UserRegistrationDto;
 import com.example.realWorld.web.user.dto.UserResponseDto;
+import com.example.realWorld.web.user.dto.UserUpdateDto;
 import com.example.realWorld.web.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,5 +24,11 @@ public class UserController {
 	public ResponseEntity<UserResponseDto> registration(@RequestBody UserRegistrationDto userRegistrationDto) {
 		UserResponseDto registrationDto = userService.registration(userRegistrationDto);
 		return new ResponseEntity<>(registrationDto, HttpStatus.OK);
+	}
+
+	@PutMapping("/api/users")
+	public ResponseEntity<UserResponseDto> update(@RequestBody UserUpdateDto userUpdateDto) {
+		UserResponseDto updateDto = userService.update(userUpdateDto);
+		return new ResponseEntity<>(updateDto, HttpStatus.OK);
 	}
 }

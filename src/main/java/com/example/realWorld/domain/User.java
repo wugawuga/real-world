@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.realWorld.web.user.dto.UserUpdateDto;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +31,8 @@ public class User {
 	@Column(unique = true)
 	private String email;
 	private String password;
+	private String bio;
+	private String image;
 
 	@Builder
 	public User(String username, String email, String password) {
@@ -43,5 +47,11 @@ public class User {
 			.email(email)
 			.password(password)
 			.build();
+	}
+
+	public void update(UserUpdateDto userUpdateDto) {
+		this.email = userUpdateDto.getEmail();
+		this.bio = userUpdateDto.getBio();
+		this.image = userUpdateDto.getImage();
 	}
 }
